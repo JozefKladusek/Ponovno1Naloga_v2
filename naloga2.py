@@ -38,7 +38,27 @@ def filtriraj_z_gaussovim_jedrom(slika,sigma):
     pass
 
 def filtriraj_sobel_smer(slika):
+     '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
 
+
+    sobel_y = np.array([[-1, 0, 1],
+                        [-2, 0, 2],
+                        [-1, 0, 1]])
+
+    slika = cv.filter2D(slika, -1, sobel_y)
+
+    height, width = slika.shape[:2]
+    temp_img = np.zeros((slika.shape[0], slika.shape[1], 3), dtype=np.float32)
+
+    # Find indices where pixel values are higher than 120
+    for y in range(0, slika.shape[0], 1):
+        for x in range(0, slika.shape[1], 1):
+            if slika[y, x] > 120:
+                temp_img[y, x] = [255, 0, 0]
+
+    return temp_img
+
+    return slika
     pass
 
     return slika
@@ -49,5 +69,11 @@ img = cv.imread(".utils/lenna.png",cv.IMREAD_GRAYSCALE)
     jedro = np.array([[1/9, 1/9, 1/9],
                       [1/9, 1/9, 1/9],
                       [1/9, 1/9,1/9]], dtype=np.float32)
+                      sigma = 1.5
+    cv.imshow("navadna", img)
+    imgTest = filtriraj_sobel_smer(img)
+    cv.imshow("Sobel", imgTest)
+    cv.waitKey(0)
+    
     imgTest=konvolucija(img,jedro)
     pass
