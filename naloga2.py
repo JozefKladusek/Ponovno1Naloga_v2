@@ -36,12 +36,12 @@ def konvolucija(slika, jedro):
 
 def filtriraj_z_gaussovim_jedrom(slika,sigma):
     '''Filtrira sliko z Gaussovim jedrom..'''
-    velikostjedra = int((2*sigma)*2+1)
-    k = (velikostjedra/2)-(1/2)
+    velikost_jedra = int((2*sigma)*2+1)
+    k = (velikost_jedra/2)-(1/2)
 
     kernel = np.fromfunction(lambda x, y: (1 / (2 * np.pi * sigma ** 2)) * np.exp(
         -((x - k - 1) ** 2 + (y - k - 1) ** 2) / (2 * sigma ** 2)),
-                             (velikostjedra, velikostjedra))
+                             (velikost_jedra, velikost_jedra))
 
     # Apply convolution with Gaussian kernel
     slika = konvolucija(slika, jedro)
