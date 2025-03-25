@@ -35,6 +35,18 @@ def konvolucija(slika, jedro):
     pass
 
 def filtriraj_z_gaussovim_jedrom(slika,sigma):
+    '''Filtrira sliko z Gaussovim jedrom..'''
+    velikost_jedra = int((2*sigma)*2+1)
+    k = (velikost_jedra/2)-(1/2)
+
+    kernel = np.fromfunction(lambda x, y: (1 / (2 * np.pi * sigma ** 2)) * np.exp(
+        -((x - k - 1) ** 2 + (y - k - 1) ** 2) / (2 * sigma ** 2)),
+                             (velikost_jedra, velikost_jedra))
+
+    # Apply convolution with Gaussian kernel
+    slika = konvolucija(slika, jedro)
+
+    return slika
     pass
 
 def filtriraj_sobel_smer(slika):
@@ -75,5 +87,14 @@ img = cv.imread(".utils/lenna.png",cv.IMREAD_GRAYSCALE)
     cv.imshow("Sobel", imgTest)
     cv.waitKey(0)
     
+     imgTest = filtriraj_z_gaussovim_jedrom(img, sigma)
+    cv.imshow("Gaussov Filter", imgTest)
+
+    cv.waitKey(0)
+    
     imgTest=konvolucija(img,jedro)
+    cv.imshow("Navdna Konvulacija z jedrom", imgTest)
+    cv.waitKey(0)
+
+    cv.destroyAllWindows()
     pass
