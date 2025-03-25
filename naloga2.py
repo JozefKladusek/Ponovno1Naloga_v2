@@ -2,6 +2,8 @@ import cv2 as cv
 import numpy as np
 
 def konvolucija(slika, jedro):
+'''Izvede konvolucijo nad sliko. Brez uporabe funkcije cv.filter2D, ali katerekoli druge funkcije, ki izvaja konvolucijo.
+    Funkcijo implementirajte sami z uporabo zank oz. vektorskega računanja.'''
     slika = slika.astype(np.float32)
 
     height, width = slika.shape[:2]
