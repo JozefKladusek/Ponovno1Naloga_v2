@@ -38,7 +38,7 @@ def filtriraj_z_gaussovim_jedrom(slika,sigma):
     pass
 
 def filtriraj_sobel_smer(slika):
-    
+     '''Filtrira sliko z Sobelovim jedrom in označi gradiente v orignalni sliki glede na ustrezen pogoj.'''
 
 
     sobel_y = np.array([[-1, 0, 1],
@@ -50,7 +50,7 @@ def filtriraj_sobel_smer(slika):
     height, width = slika.shape[:2]
     temp_img = np.zeros((slika.shape[0], slika.shape[1], 3), dtype=np.float32)
 
-    
+    # Find indices where pixel values are higher than 120
     for y in range(0, slika.shape[0], 1):
         for x in range(0, slika.shape[1], 1):
             if slika[y, x] > 120:
